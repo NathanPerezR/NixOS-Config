@@ -10,19 +10,13 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "pc"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  networking.hostName = "pc";                 # host name def 
+  # networking.wireless.enable = true;        # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;    # enable networking
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -42,13 +36,11 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  services.xserver.enable = true;                   # Enable the X11 windowing system.
+  
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;       # Enable the KDE Plasma Desktop Environment.
+  services.desktopManager.plasma6.enable = true;    # Enable the KDE Plasma Desktop Environment.
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -56,8 +48,7 @@
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = true;                  # enable CUPS to print documents 
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -75,9 +66,6 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nathan = {
     isNormalUser = true;
@@ -86,8 +74,9 @@
     packages = with pkgs; [];
   };
 
+  # Nvida driver stuff
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics.enable = true; # Use hardware.opengl.enable on <24.05
+  hardware.graphics.enable = true;
   hardware.nvidia.open = false;
 
   # Install firefox
@@ -119,7 +108,6 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -128,12 +116,6 @@
     nssmdns = true;
     openFirewall = true;
   };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

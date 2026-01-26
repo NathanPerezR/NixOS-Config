@@ -25,26 +25,23 @@
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
 
-    # utils
     ripgrep    # recursively searches directories for a regex pattern
     fzf        # A command-line fuzzy finder
+    zoxide     # better ls
+    lazygit    # terminal git client
 
-    # nix related
-    #
-    # it provides the command `nom` works just like `nix`
-    # with more details log output
-    nix-output-monitor
+    nix-output-monitor # provides the 'nom' command, works like 'nix' but more output in the logs
 
-    discord-ptb   # discord
-    neofetch
+    discord-ptb
+    neofetch           # display system info 
 
-    darktable     # 
+    darktable     # raw photo editing application
     foliate       # pdf reader
 
     # programming stuff
-    go            # go 
-    rustup        # rust
-    godot         # godot
+    go
+    rustup
+    godot
 
     # nvim depedencies 
     gcc
@@ -58,7 +55,7 @@
     userEmail = "me@nathanperez.dev";
   };
 
-  # alacritty - a cross-platform, GPU-accelerated terminal emulator
+  # terminal 
   programs.alacritty = {
     enable = true;
     theme = "catppuccin";
@@ -78,11 +75,9 @@
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
 
-    # set some aliases, feel free to add more or remove some
+    # aliases
     shellAliases = {
-      k = "kubectl";
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+      ls = "ls -la";
     };
   };
 
