@@ -96,6 +96,8 @@
   hardware.xone.enable = true; 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  boot.kernelModules = [ "xpad" ];
+  services.blueman.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
