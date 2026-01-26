@@ -88,6 +88,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # bluetooth
+  hardware.xone.enable = true; 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
