@@ -67,20 +67,24 @@
     };
   };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
-    enableCompletion = true;
-    # TODO add your custom bashrc here
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    '';
-
-    # aliases
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "zoxide"
+      ];
+      theme = "agnoster";
+    };
     shellAliases = {
-      ls = "ls -la";
+      # nixOS stuff
+      nr  = "sudo nixos-rebuild switch --flake .#pc";  # rebuild and switch
+      nb  = "sudo nixos-rebuild build --flake .#pc";   # rebuild no switch
+
     };
   };
-
+  
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
