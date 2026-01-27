@@ -29,6 +29,7 @@
     fzf        # A command-line fuzzy finder
     zoxide     # better ls
     lazygit    # terminal git client
+    tmux       # terminal multiplexer 
 
     nix-output-monitor # provides the 'nom' command, works like 'nix' but more output in the logs
 
@@ -83,6 +84,9 @@
       nb  = "sudo nixos-rebuild build --flake .#pc";   # rebuild no switch
 
     };
+    initExtra = ''
+      neofetch
+    '';
   };
   
   # This value determines the home Manager release that your
