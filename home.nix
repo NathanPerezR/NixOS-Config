@@ -4,6 +4,9 @@
   home.username = "nathan";
   home.homeDirectory = "/home/nathan";
 
+  # font setup 
+  fonts.fontconfig.enable = true;
+
   # Import files from the current configuration directory into the Nix store,
   # and create symbolic links pointing to those store files in the Home directory.
 
@@ -24,6 +27,8 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
+
+    nerd-fonts.fira-mono # font
 
     ripgrep    # recursively searches directories for a regex pattern
     fzf        # A command-line fuzzy finder
@@ -74,6 +79,7 @@
     settings = {
       font = {
         size = 12;
+        normal.family = "FiraMono Nerd Font Mono";
       };
       selection.save_to_clipboard = true;
     };
