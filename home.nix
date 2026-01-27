@@ -29,7 +29,6 @@
     fzf        # A command-line fuzzy finder
     zoxide     # better ls
     lazygit    # terminal git client
-    tmux       # terminal multiplexer 
 
     nix-output-monitor # provides the 'nom' command, works like 'nix' but more output in the logs
 
@@ -49,11 +48,23 @@
     ripgrep
   ];
 
-  # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "Nathan Perez";
-    userEmail = "me@nathanperez.dev";
+    settings = {
+      user.name = "Nathan Perez";
+      user.email = "me@nathanperez.dev";
+    }; 
+  };
+
+  programs.tmux = {
+    enable = true;
+    baseIndex = 1;
+    newSession = true;
+    escapeTime = 0;
+    secureSocket = false;
+    mouse = true;
+    clock24 = true;
+    prefix = "C-a";
   };
 
   # terminal 
@@ -84,7 +95,7 @@
       nb  = "sudo nixos-rebuild build --flake .#pc";   # rebuild no switch
 
     };
-    initExtra = ''
+    initContent = ''
       neofetch
     '';
   };
