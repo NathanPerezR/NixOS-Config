@@ -39,6 +39,7 @@
 
     discord-ptb
     neofetch           # display system info 
+    prismlauncher
 
     darktable     # raw photo editing application
     foliate       # pdf reader
@@ -51,6 +52,8 @@
     # nvim depedencies 
     gcc
     ripgrep
+
+    heroic
   ];
 
   programs.git = {
