@@ -34,6 +34,7 @@
     fzf        # A command-line fuzzy finder
     zoxide     # better ls
     lazygit    # terminal git client
+    screen     # 
 
     nix-output-monitor # provides the 'nom' command, works like 'nix' but more output in the logs
 
@@ -54,6 +55,7 @@
     ripgrep
 
     heroic
+    librewolf
   ];
 
   programs.git = {
