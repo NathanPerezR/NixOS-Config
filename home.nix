@@ -35,6 +35,8 @@
     zoxide     # better ls
     lazygit    # terminal git client
     screen     # 
+    vlc
+    obs-studio
 
     nix-output-monitor # provides the 'nom' command, works like 'nix' but more output in the logs
 
@@ -56,6 +58,10 @@
 
     heroic
     librewolf
+
+    teamspeak6-client
+
+    unityhub
   ];
 
   programs.git = {
