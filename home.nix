@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
   home.username = "nathan";
@@ -50,7 +50,7 @@
     # programming stuff
     go
     rustup
-    godot
+    unstable.godot_4
 
     # nvim depedencies 
     gcc
