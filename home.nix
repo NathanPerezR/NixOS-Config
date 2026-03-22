@@ -51,6 +51,7 @@
     go
     rustup
     unstable.godot_4
+    nodejs
 
     # nvim depedencies 
     gcc
