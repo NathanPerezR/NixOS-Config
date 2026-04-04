@@ -10,6 +10,26 @@
       ./hardware-configuration.nix
     ];
 
+
+    # Nix maintenance
+    nix.settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+
+    users.users.nathan = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      description = "Nathan";
+      extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
+    };
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -39,9 +59,6 @@
   services.xserver.enable = true;                   # Enable the X11 windowing system.
   
   programs.zsh.enable = true;
-  users.users.nathan = {
-    shell = pkgs.zsh;
-  };
 
   services.displayManager.sddm.enable = true;       # Enable the KDE Plasma Desktop Environment.
   services.desktopManager.plasma6.enable = true;    # Enable the KDE Plasma Desktop Environment.
@@ -70,14 +87,6 @@
     #media-session.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nathan = {
-    isNormalUser = true;
-    description = "Nathan";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "tty"];
-    packages = with pkgs; [];
-  };
-
   # Nvida driver stuff
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
@@ -102,14 +111,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
+    vim
     kitty
     git
     zoxide
   ];
-
-
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

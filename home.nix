@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 
 {
   home.username = "nathan";
@@ -41,7 +41,7 @@
     nix-output-monitor # provides the 'nom' command, works like 'nix' but more output in the logs
 
     discord-ptb
-    neofetch           # display system info 
+    fastfetch 
     prismlauncher
 
     darktable     # raw photo editing application
@@ -50,12 +50,15 @@
     # programming stuff
     go
     rustup
-    unstable.godot_4
+    godot_4
     nodejs
 
     # nvim depedencies 
+    neovim
     gcc
     ripgrep
+    # lsps
+    lua-language-server
 
     heroic
     librewolf
@@ -114,7 +117,7 @@
 
     };
     initContent = ''
-      neofetch
+      fastfetch
     '';
   };
   
