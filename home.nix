@@ -1,81 +1,26 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable,  home, inputs, ... }:
 
 {
   home.username = "nathan";
   home.homeDirectory = "/home/nathan";
+  home.stateVersion = "25.11";
 
-  # font setup 
-  fonts.fontconfig.enable = true;
+  programs.home-manager.enable = true;
 
-  # Import files from the current configuration directory into the Nix store,
-  # and create symbolic links pointing to those store files in the Home directory.
-
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-  # Import the scripts directory into the Nix store,
-  # and recursively generate symbolic links in the Home directory pointing to the files in the store.
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-
-  # encode the file content in nix configuration file directly
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
-
-  # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
-
-    nerd-fonts.fira-mono # font
-
-    ripgrep    # recursively searches directories for a regex pattern
-    fzf        # A command-line fuzzy finder
-    zoxide     # better ls
-    lazygit    # terminal git client
-    screen     # 
-    vlc
-    obs-studio
-
-    nix-output-monitor # provides the 'nom' command, works like 'nix' but more output in the logs
-
-    discord-ptb
-    fastfetch 
-    prismlauncher
-
-    darktable     # raw photo editing application
-    foliate       # pdf reader
-
-    # programming stuff
-    go
-    rustup
-    godot_4
-    nodejs
-
-    # nvim depedencies 
-    neovim
-    gcc
-    ripgrep
-    # lsps
-    lua-language-server
-
-    heroic
-    librewolf
-
-    teamspeak6-client
-
-    unityhub
-  ];
-
+  # git
+  home.activation.createGitRepos = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p $HOME/GitRepos
+  '';
   programs.git = {
     enable = true;
-    settings = {
+    settings = { 
       user.name = "Nathan Perez";
-      user.email = "me@nathanperez.dev";
-    }; 
+      user.email = "contact@nathanperez.dev";
+    };
   };
 
+
+  # tmux
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -87,47 +32,63 @@
     prefix = "C-a";
   };
 
-  # terminal 
+  # alacritty 
   programs.alacritty = {
     enable = true;
     theme = "catppuccin";
     settings = {
       font = {
         size = 12;
-        normal.family = "FiraMono Nerd Font Mono";
+        normal.family = "JetBrainsMono Nerd Font";
       };
       selection.save_to_clipboard = true;
     };
   };
 
+  # zsh 
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "git"
-        "zoxide"
-      ];
+      plugins = [ "git" "zoxide" ];
       theme = "agnoster";
     };
     shellAliases = {
-      # nixOS stuff
-      nr  = "sudo nixos-rebuild switch --flake .#pc";  # rebuild and switch
-      nb  = "sudo nixos-rebuild build --flake .#pc";   # rebuild no switch
-
+      nr  = "sudo nixos-rebuild switch --flake .#pc";
+      nb  = "sudo nixos-rebuild build --flake .#pc";
+      nfu = "nix flake update";
     };
     initContent = ''
       fastfetch
+      eval "$(zoxide init zsh)"
     '';
   };
-  
-  # This value determines the home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update home Manager without changing this value. See
-  # the home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "25.11";
+
+  home.packages = with pkgs; [
+
+    firefox
+    zoxide
+    lazygit
+    alacritty
+    fastfetch
+    nix-output-monitor
+    discord-ptb
+    teamspeak6-client
+    heroic
+    prismlauncher
+    darktable
+    vlc
+    obs-studio
+
+    # neovim stuffs
+    pkgs.unstable.neovim
+    ripgrep
+    fzf
+    gcc
+    lua-language-server
+    omnisharp-roslyn
+    dotnet-sdk_8
+    dotnet-runtime_8
+
+  ];
 }
