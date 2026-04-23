@@ -29,10 +29,6 @@
     };
   };
 
-  # home.file.".local/share/fonts/BerkeleyMonoNerdFont-Regular.ttf".source =
-  #   ./Secret/BerkeleyMonoNerdFont-Regular.ttf;
-  # fonts.fontconfig.enable = true;
-
   # tmux
   programs.tmux = {
     enable = true;
@@ -52,7 +48,7 @@
     settings = {
       font = {
         size = 12;
-        # normal.family = "BerkeleyMono Nerd Font";
+        normal.family = "BerkeleyMono Nerd Font";
       };
       selection.save_to_clipboard = true;
     };

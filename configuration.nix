@@ -5,6 +5,14 @@
     ./hardware-configuration.nix
   ];
 
+
+  sops.secrets.font = {
+    owner = "nathan";
+    path = "/home/nathan/.local/share/fonts/cool-font.ttf";
+    format = "binary";
+    sopsFile = ./Secret/font.ttf;
+  };
+
   sops = {
     defaultSopsFile = ./Secret/secrets.yaml;
     age = {
