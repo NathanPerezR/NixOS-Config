@@ -11,6 +11,7 @@
   home.activation.createGitRepos = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p $HOME/GitRepos
   '';
+
   programs.git = {
     enable = true;
     settings = { 
@@ -19,6 +20,18 @@
     };
   };
 
+  programs.ssh = {
+    enable = true;
+    matchBlocks."github.com" = {
+      hostname = "github.com";
+      user = "git";
+      identityFile = "~/.ssh/github";
+    };
+  };
+
+  # home.file.".local/share/fonts/BerkeleyMonoNerdFont-Regular.ttf".source =
+  #   ./Secret/BerkeleyMonoNerdFont-Regular.ttf;
+  # fonts.fontconfig.enable = true;
 
   # tmux
   programs.tmux = {
@@ -39,7 +52,7 @@
     settings = {
       font = {
         size = 12;
-        normal.family = "JetBrainsMono Nerd Font";
+        # normal.family = "BerkeleyMono Nerd Font";
       };
       selection.save_to_clipboard = true;
     };
@@ -64,6 +77,12 @@
     '';
   };
 
+
+home.sessionVariables = {
+  EDITOR = "nvim";
+  VISUAL = "nvim";
+};
+
   home.packages = with pkgs; [
 
     firefox
@@ -79,6 +98,8 @@
     darktable
     vlc
     obs-studio
+    sops
+    ssh-to-age
 
     # neovim stuffs
     pkgs.unstable.neovim

@@ -5,6 +5,21 @@
     ./hardware-configuration.nix
   ];
 
+  sops = {
+    defaultSopsFile = ./Secret/secrets.yaml;
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      keyFile = "/home/nathan/.config/sops/age/keys.txt";
+    };
+  };
+
+  sops.secrets.github_ssh_key = {
+    owner = "nathan";
+    path = "/home/nathan/.ssh/github";
+  };
+
+  
+
   networking.hostName = "pc";
 
   # nvidia driver stuff
@@ -59,9 +74,9 @@
   services.printing.enable = true;    
 
   # fonts
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+  # fonts.packages = with pkgs; [
+  #   nerd-fonts.jetbrains-mono
+  # ];
 
   # shell
   programs.zsh.enable = true;
@@ -104,12 +119,6 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-  };
-
-  # TODO: secrets 
-  sops = {
-    defaultSopsFile = ./secrets.yaml;
-    age.keyFile = "/home/nathan/.config/sops/age/keys.txt";
   };
 
   # global
