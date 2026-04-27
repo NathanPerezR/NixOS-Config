@@ -5,6 +5,9 @@
     ./hardware-configuration.nix
   ];
 
+  programs.gnupg.agent = {
+    enable = true;
+  };
 
   sops.secrets.font = {
     owner = "nathan";

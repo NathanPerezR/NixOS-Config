@@ -39,6 +39,7 @@
     mouse = true;
     clock24 = true;
     prefix = "C-a";
+    shell = "${pkgs.zsh}/bin/zsh"; 
   };
 
   # alacritty 
@@ -74,10 +75,12 @@
   };
 
 
-home.sessionVariables = {
-  EDITOR = "nvim";
-  VISUAL = "nvim";
-};
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    GODOT_DISABLE_CRASH_HANDLER = "1";
+    GTK_USE_PORTAL = "0";
+  };
 
   home.packages = with pkgs; [
 
@@ -88,12 +91,15 @@ home.sessionVariables = {
     fastfetch
     nix-output-monitor
     discord-ptb
-    teamspeak6-client
+    pkgs.unstable.teamspeak6-client
     heroic
     prismlauncher
     darktable
     vlc
     obs-studio
+    pkgs.unstable.blender
+
+
     sops
     ssh-to-age
 
@@ -103,6 +109,10 @@ home.sessionVariables = {
     fzf
     gcc
     lua-language-server
+
+    # Godot stuffs
+    pkgs.unstable.godot-mono
+    glib
     omnisharp-roslyn
     dotnet-sdk_8
     dotnet-runtime_8
