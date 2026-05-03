@@ -40,6 +40,9 @@
     clock24 = true;
     prefix = "C-a";
     shell = "${pkgs.zsh}/bin/zsh"; 
+    extraConfig = ''
+      set-option -g update-environment "DIRENV_DIFF DIRENV_DIR DIRENV_WATCHES"
+    '';
   };
 
   # alacritty 
@@ -74,12 +77,17 @@
     '';
   };
 
+  programs.direnv ={
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
 
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    GODOT_DISABLE_CRASH_HANDLER = "1";
-    GTK_USE_PORTAL = "0";
+    
+    
   };
 
   home.packages = with pkgs; [
@@ -99,7 +107,6 @@
     obs-studio
     pkgs.unstable.blender
 
-
     sops
     ssh-to-age
 
@@ -111,11 +118,11 @@
     lua-language-server
 
     # Godot stuffs
-    pkgs.unstable.godot-mono
-    glib
-    omnisharp-roslyn
-    dotnet-sdk_8
-    dotnet-runtime_8
+    # pkgs.unstable.godot-mono
+    # glib
+    # omnisharp-roslyn
+    # dotnet-sdk_8
+    # dotnet-runtime_8
 
   ];
 }
