@@ -24,7 +24,7 @@
     };
   };
 
-  sops.secrets.github_ssh_key = {
+  sops.secrets.github = {
     owner = "nathan";
     path = "/home/nathan/.ssh/github";
   };

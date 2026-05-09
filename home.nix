@@ -106,6 +106,7 @@
     vlc
     obs-studio
     pkgs.unstable.blender
+    element-desktop
 
     sops
     ssh-to-age
