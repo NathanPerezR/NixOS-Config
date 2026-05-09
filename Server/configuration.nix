@@ -14,6 +14,14 @@
     };
   };
 
+  fileSystems."/mnt/volume-hil-1" = {
+    device = "/dev/disk/by-id/scsi-0HC_Volume_105663434";
+    fsType = "ext4";
+    options = [ "discard" "defaults" "nofail" ];
+  };
+  services.matrix-synapse.settings.media_store_path = "/mnt/volume-hil-1/matrix/media";
+  services.postgresql.dataDir = "/mnt/volume-hil-1/postgresql";
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
