@@ -34,6 +34,7 @@
     };
 
   in {
+    # personal use desktop
     nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
       inherit system pkgs;
       specialArgs = { inherit inputs; };
@@ -47,6 +48,16 @@
           home-manager.users.nathan = import ./home.nix;
           home-manager.extraSpecialArgs = { unstable = pkgs.unstable; };
         }
+      ];
+    };
+
+    # cloud server
+    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      inherit system pkgs;
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./Server/configuration.nix
+        sops-nix.nixosModules.sops
       ];
     };
   };
