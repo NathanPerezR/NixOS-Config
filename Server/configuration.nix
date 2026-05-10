@@ -11,19 +11,22 @@
     secrets = {
       matrix_registration_shared_secret = {};
       matrix_macaroon_secret_key = {};
+      nathan_password = { 
+        neededForUsers = true;
+      };
     };
   };
 
-  fileSystems."/mnt/volume-hil-1" = {
-    device = "/dev/disk/by-id/scsi-0HC_Volume_105663434";
-    fsType = "ext4";
-    options = [ "discard" "defaults" "nofail" ];
-  };
+  systemd.tmpfiles.rules = [
+    "d /mnt/volume-hil-1/postgresql 0700 postgres postgres -"
+    "d /mnt/volume-hil-1/matrix/media 0750 matrix-synapse matrix-synapse -"
+  ];
+
   services.matrix-synapse.settings.media_store_path = "/mnt/volume-hil-1/matrix/media";
   services.postgresql.dataDir = "/mnt/volume-hil-1/postgresql";
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "nix-server0";
   networking.networkmanager.enable = true;
@@ -47,10 +50,12 @@
 
   programs.zsh.enable = true;
 
+  security.sudo.wheelNeedsPassword = false;
   users.users.nathan = {
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" ];
+    hashedPasswordFile = config.sops.secrets.nathan_password.path;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEh8hi8kMZgTNSaUwuJIVJVbPdABN8mJ+SOYCOi/OfqK nathan@pc"
     ];

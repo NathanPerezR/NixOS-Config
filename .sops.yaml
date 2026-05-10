@@ -1,13 +1,11 @@
 keys: 
   - &host_desktop age1p7nc6skmfyn0wx4fs6e99x278r2ymcpnylq0utyzaegkz65lqymqyw7eem
-  - &user_nathan age1zfmpnqlstdlppyuexqm8lhcgvtmctvddp4yapfv2sjvp9xryqsjqegz8hq
-  - &server age157ncqa8pxcnw7fvnjf7c7u8j74hdgnplzn3lpzmzpmam4h7h93sqznagd7
+  - &server age1h73ltq23vf5ruq07cpu9vn66cmt8mcga2lccqccg3sku20ru5vkqvqj0mv
 
 creation_rules:
   - path_regex: Secret/[^/]+\.(yaml|ttf)$
     key_groups: 
     - age: 
       - *host_desktop
-      - *user_nathan
       - *server
 
