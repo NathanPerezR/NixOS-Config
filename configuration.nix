@@ -29,7 +29,10 @@
     path = "/home/nathan/.ssh/github";
   };
 
-  
+  sops.secrets.PC = {
+    owner = "nathan";
+    path = "/home/nathan/.ssh/PC";
+  };
 
   networking.hostName = "pc";
 
@@ -84,11 +87,6 @@
   security.rtkit.enable = true;
   services.printing.enable = true;    
 
-  # fonts
-  # fonts.packages = with pkgs; [
-  #   nerd-fonts.jetbrains-mono
-  # ];
-
   # shell
   programs.zsh.enable = true;
 
@@ -103,11 +101,11 @@
   programs.steam.enable = true;
   hardware.graphics = {
     enable = true;
-    enable32Bit = true;  # ← this is missing!
+    enable32Bit = true;   
   };
   hardware.nvidia = {
     open = false;
-    modesetting.enable = true;  # ← recommended for stability
+    modesetting.enable = true;    
   };
 
   # bluetooth

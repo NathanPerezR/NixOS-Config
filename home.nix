@@ -20,12 +20,20 @@
     };
   };
 
+  services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
-    matchBlocks."github.com" = {
-      hostname = "github.com";
-      user = "git";
-      identityFile = "~/.ssh/github";
+    matchBlocks = {
+      "github.com" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/github";
+      };
+      "hetzner-server" = {
+        hostname = "5.78.68.113";
+        user = "root";
+        identityFile = "~/.ssh/PC";
+      };
     };
   };
 
