@@ -7,7 +7,6 @@
 
   programs.home-manager.enable = true;
 
-  # git
   home.activation.createGitRepos = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p $HOME/GitRepos
   '';
@@ -37,7 +36,6 @@
     };
   };
 
-  # tmux
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -53,7 +51,6 @@
     '';
   };
 
-  # alacritty 
   programs.alacritty = {
     enable = true;
     theme = "catppuccin";
@@ -66,7 +63,6 @@
     };
   };
 
-  # zsh 
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -125,13 +121,6 @@
     fzf
     gcc
     lua-language-server
-
-    # Godot stuffs
-    # pkgs.unstable.godot-mono
-    # glib
-    # omnisharp-roslyn
-    # dotnet-sdk_8
-    # dotnet-runtime_8
 
   ];
 }

@@ -29,11 +29,6 @@
     path = "/home/nathan/.ssh/github";
   };
 
-  sops.secrets.PC = {
-    owner = "nathan";
-    path = "/home/nathan/.ssh/PC";
-  };
-
   networking.hostName = "pc";
 
   # nvidia driver stuff
