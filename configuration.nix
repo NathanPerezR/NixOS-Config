@@ -33,6 +33,7 @@
 
   # nvidia driver stuff
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.enable = true;
 
   # nix
   nix.settings = {
